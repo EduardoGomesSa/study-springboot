@@ -15,7 +15,8 @@ public class StudentEndpoint {
     public List<Student> listAll(){
         return asList(new Student("Eduardo"),
                     new Student("Thayna"),
-                    new Student("Daniela"));
+                    new Student("Daniela"),
+                    new Student("Maria Eduarda"));
     }
 }
 
