@@ -1,7 +1,11 @@
 package academy.devdojo.springboot2.controller;
 
 import academy.devdojo.springboot2.domain.Anime;
+import academy.devdojo.springboot2.service.AnimeService;
 import academy.devdojo.springboot2.util.DateUtil;
+import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,25 +15,18 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("anime")
+@RequestMapping("animes")
+@RequiredArgsConstructor
 public class AnimeController {
-    private DateUtil dateUtil;
+    private final DateUtil dateUtil;
+    private final AnimeService animeService;
+    private static final Logger logger = LogManager.getLogger(AnimeController.class);
 
-    public AnimeController(DateUtil dateUtil) {
-        this.dateUtil = dateUtil;
-    }
-
-    @GetMapping(path = "/list")
+    @GetMapping
     public List<Anime> list(){
-        //log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return List.of(new Anime("One Piece"), new Anime("Naruto"), new Anime("CDZ"));
-    }
+        logger.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        //System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
 
-    @GetMapping(path = "/list2")
-    public List<Anime> list2(){
-        //log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return List.of(new Anime("One Punch Man"), new Anime("Dr Stone"), new Anime("Akame ga Kill"));
+        return animeService.listAll();
     }
 }
