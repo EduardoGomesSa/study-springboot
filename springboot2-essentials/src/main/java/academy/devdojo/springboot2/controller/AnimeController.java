@@ -23,6 +23,13 @@ public class AnimeController {
     public List<Anime> list(){
         //log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return List.of(new Anime("One Piece"), new Anime("Naruto"), new Anime("DBZ"));
+        return List.of(new Anime("One Piece"), new Anime("Naruto"), new Anime("CDZ"));
+    }
+
+    @GetMapping(path = "/list2")
+    public List<Anime> list2(){
+        //log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        return List.of(new Anime("One Punch Man"), new Anime("Dr Stone"), new Anime("Akame ga Kill"));
     }
 }
