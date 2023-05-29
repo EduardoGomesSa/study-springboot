@@ -17,10 +17,10 @@ public class AnimeController {
     public AnimeController(DateUtil dateUtil) {
         this.dateUtil = dateUtil;
     }
-    @GetMapping(path = "/list")
+    @GetMapping(path = "list")
     public List<Anime> list(){
         //log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return List.of(new Anime("One Piece"), new Anime("Naruto"), new Anime("CDZ"));
+        return List.of(new Anime(1L,"One Piece"), new Anime(2L,"Naruto"), new Anime(3L,"CDZ"));
     }
 }
