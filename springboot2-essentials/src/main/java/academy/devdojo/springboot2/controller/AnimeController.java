@@ -33,6 +33,12 @@ public class AnimeController {
         return ResponseEntity.ok(animeService.list(pageable));
     }
 
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<Anime>> listAll(){
+        logger.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        return ResponseEntity.ok(animeService.listAllNoPageable());
+    }
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable Long id){
         return new ResponseEntity<>(animeService.findByIdOrThrownBadRequestException(id), HttpStatus.OK);

@@ -4,8 +4,13 @@ package academy.devdojo.springboot2.client;
 import academy.devdojo.springboot2.domain.Anime;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SpringClient {
 
@@ -17,5 +22,14 @@ public class SpringClient {
 
         Anime object = new RestTemplate().getForObject("http://localhost:8080/animes/{id}", Anime.class, 2);
         logger.info(object);
+
+        Anime[] animesArray = new RestTemplate().getForObject("http://localhost:8080/animes/all", Anime[].class);
+        logger.info(Arrays.toString(animesArray));
+
+        ResponseEntity<List<Anime>> exchange = new RestTemplate().exchange("http://localhost:8080/animes/all",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {});
+        logger.info(exchange.getBody());
     }
 }
