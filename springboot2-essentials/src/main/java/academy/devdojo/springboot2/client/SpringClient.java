@@ -5,8 +5,7 @@ import academy.devdojo.springboot2.domain.Anime;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -32,8 +31,21 @@ public class SpringClient {
                 new ParameterizedTypeReference<>() {});
         logger.info(exchange.getBody());
 
-        Anime isekai = Anime.builder().name("Sword Art Online").build();
-        Anime animeSaved = new RestTemplate().postForObject("http://localhost:8080/animes/", isekai, Anime.class);
+        //Anime isekai = Anime.builder().name("Sword Art Online").build();
+        //Anime animeSaved = new RestTemplate().postForObject("http://localhost:8080/animes/", isekai, Anime.class);
+        //logger.info("Anime saved {}", animeSaved);
+
+        Anime isekai = Anime.builder().name("Konosuba").build();
+       ResponseEntity<Anime> animeSaved = new RestTemplate().exchange("http://localhost:8080/animes/",
+                HttpMethod.POST,
+                new HttpEntity<>(isekai, createJsonHeader()),
+                Anime.class);
         logger.info("Anime saved {}", animeSaved);
+    }
+
+    private static HttpHeaders createJsonHeader(){
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return httpHeaders;
     }
 }
