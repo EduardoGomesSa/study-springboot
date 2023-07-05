@@ -31,5 +31,9 @@ public class SpringClient {
                 null,
                 new ParameterizedTypeReference<>() {});
         logger.info(exchange.getBody());
+
+        Anime isekai = Anime.builder().name("Sword Art Online").build();
+        Anime animeSaved = new RestTemplate().postForObject("http://localhost:8080/animes/", isekai, Anime.class);
+        logger.info("Anime saved {}", animeSaved);
     }
 }
