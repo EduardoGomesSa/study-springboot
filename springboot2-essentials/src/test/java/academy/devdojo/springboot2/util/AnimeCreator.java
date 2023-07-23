@@ -1,0 +1,25 @@
+package academy.devdojo.springboot2.util;
+
+import academy.devdojo.springboot2.domain.Anime;
+
+public class AnimeCreator {
+    public static Anime createAnimeToBeSaved(){
+        return Anime.builder()
+                .name("Boku no Hero")
+                .build();
+    }
+
+    public static Anime createValidAnime(){
+        return Anime.builder()
+                .name("Boku no Hero")
+                .id(1L)
+                .build();
+    }
+
+    public static Anime createUpdatedAnime(){
+        return Anime.builder()
+                .name("Boku no Hero 2")
+                .id(1L)
+                .build();
+    }
+}

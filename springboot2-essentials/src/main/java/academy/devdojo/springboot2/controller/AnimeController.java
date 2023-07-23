@@ -23,19 +23,15 @@ import java.util.List;
 @RequestMapping("animes")
 @RequiredArgsConstructor
 public class AnimeController {
-    private static final Logger logger = LogManager.getLogger(AnimeController.class);
-    private final DateUtil dateUtil;
     private final AnimeService animeService;
 
     @GetMapping
     public ResponseEntity<Page<Anime>> list(Pageable pageable){
-        logger.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.list(pageable));
     }
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<Anime>> listAll(){
-        logger.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.listAllNoPageable());
     }
 
